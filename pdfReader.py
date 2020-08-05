@@ -35,20 +35,39 @@ def search_keyword(pdf_file_path, keyword):
             if keyword in j:
                 page.append(i+1)
                 sentence.append(j.replace("\n", "").strip())
+    print("Scanning...")
+    if(len(page)==0):
+        return False
     return dict(zip(page,sentence))
 #     return [{"page_number": i, "sentence": "some text sjajadn snajksjakdna djajakj"}]
 
 
-file_path=input("Enter absolute file path")
-print("PDF Text:\n",read_pdf_file(file_path))
+import os
 
-choice=input("If you want to search a keyword yes/no: ")
-if(choice.lower()=='yes'):
-    keyword=input("Enter Keyword to search")
-    d=search_keyword(file_path,keyword)
-    for i in d:
-        print("page no.:",i,"\tSentence:",d[i])
-        print()
+def getResults(path,keyword):
+    files=os.listdir(path)
+    findings={}
+    for i in files:
+        fpath=path+"/"+i
+        if(i.endswith(".pdf")):
+            dictionary=search_keyword(fpath,keyword)
+            if(dictionary):
+                findings[i]=dictionary
+    return findings                     # returning format is {filename : {page : sentence}, filename : {page : sentence} }
+
+
+
+
+# file_path=input("Enter absolute file path: ")
+# print("PDF Text:\n",read_pdf_file(file_path))
+
+# choice=input("If you want to search a keyword yes/no: ")
+# if(choice.lower()=='yes'):
+#     keyword=input("Enter Keyword to search: ")
+#     d=search_keyword(file_path,keyword)
+#     for i in d:
+#         print("page no.:",i,"\tSentence:",d[i])
+#         print()
 
 
 

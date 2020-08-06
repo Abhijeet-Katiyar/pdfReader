@@ -4,7 +4,7 @@ import PyPDF2
 import re
 
 def clean(text):
-    reg=re.compile('[A-Za-z0-9. ]')
+    reg=re.compile('[A-Za-z0-9 .]')
     return ''.join(re.findall(reg,text))
 
 
@@ -34,7 +34,7 @@ def search_keyword(pdf_file_path, keyword):
         for j in l:             # j represents sentence
             if keyword in j:
                 page.append(i+1)
-                sentence.append(j.replace("\n", "").strip())
+                sentence.append(j.replace("\n", " ").strip())
     print("Scanning...")
     if(len(page)==0):
         return False
@@ -54,8 +54,6 @@ def getResults(path,keyword):
             if(dictionary):
                 findings[i]=dictionary
     return findings                     # returning format is {filename : {page : sentence}, filename : {page : sentence} }
-
-
 
 
 # file_path=input("Enter absolute file path: ")

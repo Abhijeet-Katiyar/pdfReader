@@ -5,6 +5,12 @@ from pdfReader import getResults
 root=Tk()
 root.title("PDF Explorer")
 
+# To open window as maximized
+width, height = root.winfo_screenwidth(), root.winfo_screenheight()
+
+root.geometry('%dx%d+0+0' % (width,height))
+
+
 def select():
     global pathLabel
     #global root.filepath
@@ -21,10 +27,13 @@ BrowseButton.grid(row=0,column=1)
 def Search(keyword):
     global outputLabel
     results=getResults(root.filepath,keyword)
-    for i in results:
-        s="File Name: "+str(i)+"\t pagenumbers: "+str(list(results[i].keys()))
-        outputLabel=Label(outputFrame,text=s)
-        outputLabel.pack()
+    for index,i in enumerate(results):
+        filename="File Name: "+str(i)
+        pagenum="pagenumbers: "+str(list(results[i].keys()))
+        filename_outputLabel=Label(outputFrame,text=filename,anchor="w")
+        filename_outputLabel.grid(row=index,column=0,padx=5,pady=5,sticky="w")
+        pagenum_outputLable=Label(outputFrame,text=pagenum,anchor="w",wraplength=800,justify=LEFT)
+        pagenum_outputLable.grid(row=index,column=1,padx=5,pady=5,sticky="w")
 
 
 keywordEntry=Entry(inputFrame,width=50,borderwidth=5)
@@ -38,10 +47,7 @@ inputFrame.pack(padx=10,pady=5)
 
 
 outputFrame=LabelFrame(root,padx=30,pady=30)
-outputLabel=Label(outputFrame)
-outputLabel.pack()
-
-outputFrame.pack(padx=10,pady=5)
+outputFrame.pack(padx=10,pady=5,fill="both")
 
 
 mainloop()

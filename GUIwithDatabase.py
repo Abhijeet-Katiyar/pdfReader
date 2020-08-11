@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
-from pdfReader import getResults
+from pdfReaderWithDatabase import getResults
 from tkinter import ttk
 import threading
 
@@ -52,7 +52,7 @@ def viewDetails(results,filename):
     #myLabel=Label(top,text=filename).pack()
     for index,i in enumerate(results[filename]):
         pagenum="page: "+str(i)
-        sentence="Sentence: "+results[filename][i]
+        sentence="Sentence: "+str(results[filename][i])
         pageLabel=ttk.Label(outputFrame1,text=pagenum,anchor="w")
         pageLabel.grid(row=index,column=0,padx=10,pady=10,sticky="w")
         sentenceLabel=ttk.Label(outputFrame1,text=sentence,anchor="w",wraplength=1400,justify=LEFT)

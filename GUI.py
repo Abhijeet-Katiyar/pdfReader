@@ -86,9 +86,6 @@ def Search():
     detailButton.grid(row=len(results),column=0)
    
 
-
-
-
 keywordEntry=Entry(inputFrame,width=50,borderwidth=5)
 searchButton=Button(inputFrame,text="search",command= lambda: threading.Thread(target=Search).start())
 keywordEntry.grid(row=1,column=0,padx=10,pady=5)

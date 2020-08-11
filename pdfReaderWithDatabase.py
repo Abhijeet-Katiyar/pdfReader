@@ -10,8 +10,8 @@ def initiateDatabase():
     conn=sqlite3.connect('pdfReader.db')
     c=conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS PDFDATA(FileName Text Unique, FileText TEXT)''')
-    # conn.execute('''REINDEX pdfReader.PDFDATA''')
-    c.execute("""create unique index FileName_index on PDFDATA(FileName)""")
+    c.execute('''REINDEX''')
+    #c.execute("""create unique index FileName_index on PDFDATA(FileName)""")
     return c,conn
 
 
@@ -76,7 +76,7 @@ def search_keyword(keyword,c,dirFileList):      # c is database cursor
 
 def commitAndClose(c,conn):  # C is cursor
     conn.commit()
-    c.execute("""DROP INDEX IF EXISTS FileName_index""")
+    #c.execute("""DROP INDEX IF EXISTS FileName_index""")
     # conn.execute("""VACUUM""")
     c.close()
     conn.close()

@@ -17,14 +17,14 @@ def select():
     global pathLabel
     #global root.filepath
     root.filepath=filedialog.askdirectory(initialdir="./",title="select a folder")  # root.filepath will have the absolute path of choosen directory
-    pathLabel=Label(inputFrame,text=root.filepath)
+    pathLabel=Label(inputFrame,text=root.filepath,font = ('courier', 10, 'italic'))
     pathLabel.grid(row=0,column=0)
 
 # GUI for selecting directory
-inputFrame=LabelFrame(root,padx=30,pady=30)
-pathLabel=Label(inputFrame,text="Directory path...")
+inputFrame=ttk.LabelFrame(root)
+pathLabel=ttk.Label(inputFrame,text="Directory path...",font = ('courier', 10, 'italic'))
 pathLabel.grid(row=0,column=0)
-BrowseButton=Button(inputFrame,text="Select Folder",command=select)
+BrowseButton=ttk.Button(inputFrame,text="Select Folder",command=select)
 BrowseButton.grid(row=0,column=1)
 
 var=StringVar() # var will store the filename 
@@ -53,9 +53,9 @@ def viewDetails(results,filename):
     for index,i in enumerate(results[filename]):
         pagenum="page: "+str(i)
         sentence="Sentence: "+str(results[filename][i])
-        pageLabel=ttk.Label(outputFrame1,text=pagenum,anchor="w")
+        pageLabel=ttk.Label(outputFrame1,text=pagenum,anchor="w",font = ('courier', 10, 'normal'))
         pageLabel.grid(row=index,column=0,padx=10,pady=10,sticky="w")
-        sentenceLabel=ttk.Label(outputFrame1,text=sentence,anchor="w",wraplength=1400,justify=LEFT)
+        sentenceLabel=ttk.Label(outputFrame1,text=sentence,anchor="w",wraplength=1400,justify=LEFT,font = ('courier', 11, 'normal'))
         sentenceLabel.grid(row=index,column=1,padx=10,pady=10,sticky="w")
     canvas1.create_window((0, 0), window=outputFrame1, anchor="nw")
     canvas1.configure(yscrollcommand=scrollbar1.set)
@@ -76,25 +76,25 @@ def Search():
     for index,i in enumerate(results):
         filename="File Name: "+str(i)
         pagenum="pagenumbers: "+str(list(results[i].keys()))
-        filename_outputLabel=ttk.Label(outputFrame,text=filename,anchor="w",wraplength=300)
+        filename_outputLabel=ttk.Label(outputFrame,text=filename,anchor="w",wraplength=300,font = ('courier', 10, 'normal'))
         filename_outputLabel.grid(row=index,column=0,padx=10,pady=10,sticky="w")
-        pagenum_outputLable=ttk.Label(outputFrame,text=pagenum,anchor="w",wraplength=1000,justify=LEFT)
+        pagenum_outputLable=ttk.Label(outputFrame,text=pagenum,anchor="w",wraplength=1000,justify=LEFT,font = ('courier', 10, 'normal'))
         pagenum_outputLable.grid(row=index,column=1,padx=10,pady=10,sticky="w")
         #adding radio buttons
         Radiobutton(outputFrame,variable=var,value=i).grid(row=index,column=2)
-    detailButton=Button(outputFrame,text="view Details",command= lambda: viewDetails(results,var.get()))
+    detailButton=ttk.Button(outputFrame,text="view Details",command= lambda: viewDetails(results,var.get()))
     detailButton.grid(row=len(results),column=0)
    
 
 
 
 
-keywordEntry=Entry(inputFrame,width=50,borderwidth=5)
-searchButton=Button(inputFrame,text="search",command= lambda: threading.Thread(target=Search).start())
+keywordEntry=ttk.Entry(inputFrame,width=50,font = ('courier', 10, 'normal'))
+searchButton=ttk.Button(inputFrame,text="search",command= lambda: threading.Thread(target=Search).start())
 keywordEntry.grid(row=1,column=0,padx=10,pady=5)
 searchButton.grid(row=1,column=1,padx=10,pady=5)
 
-inputFrame.pack(padx=10,pady=20)
+inputFrame.pack(padx=30,pady=30)
 
 
 

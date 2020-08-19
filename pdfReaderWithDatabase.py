@@ -16,8 +16,11 @@ def initiateDatabase():
 
 
 def clean(text):
-    reg=re.compile('[A-Za-z0-9 .]')
-    return ''.join(re.findall(reg,text))
+    reg=re.compile('[A-Za-z0-9 ._\\n]')
+    s=''.join(re.findall(reg,text))
+    res = re.sub(' +', ' ', s)
+    res = re.sub('\n', ' ', s) 
+    return res
 
 
 def read_pdf_file(file_path,filename,c):

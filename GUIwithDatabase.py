@@ -3,9 +3,22 @@ from tkinter import filedialog
 from pdfReaderWithDatabase import getResults
 from tkinter import ttk
 import threading
+from ttkthemes import ThemedTk
 
-root=Tk()
+root=ThemedTk(theme="breeze")
 root.title("PDF Explorer")
+root.configure(background="white")
+
+
+# Style for ttk widgets
+ # Initialize style
+s = ttk.Style()
+# Create style used by default for all Frames
+s.configure('TLabel', background='white')
+s.configure('TGrid',background="white")
+s.configure('TCanvas',background="white")
+s.configure('TPack',background="white")
+
 
 # To open window as maximized
 width, height = root.winfo_screenwidth(), root.winfo_screenheight()
@@ -32,13 +45,16 @@ var=StringVar() # var will store the filename
 
 def viewDetails(results,filename):
     """Function to show page and sentences of findings"""
-    top=Toplevel()
+    top=Toplevel(bg="white")
     top.geometry('%dx%d+0+0' % (width,height))
+    top.configure(background="white")
     top.lift()
 
     # Canvas for scrollable frame
+
+   
     container1 = ttk.Frame(top)
-    canvas1 = Canvas(container1,width=1493,height=820)
+    canvas1 = Canvas(container1,bg="white",width=1493,height=820)
     # Adding Scroll bar
     outputFrame1 = ttk.Frame(canvas1)
     scrollbar1 = ttk.Scrollbar(container1, orient="vertical", command=canvas1.yview)
@@ -62,7 +78,7 @@ def viewDetails(results,filename):
 
     container1.pack()
     canvas1.pack(side="left", fill="both", expand=True)
-    # outputFrame.pack(padx=10,pady=5,fill="both")
+    outputFrame.pack(padx=10,pady=5,fill="both")
     scrollbar1.pack(side="right", fill="y")
 
 
@@ -100,8 +116,9 @@ inputFrame.pack(padx=30,pady=30)
 
 
 # Canvas for scrollable frame
+
 container = ttk.Frame(root)
-canvas = Canvas(container,width=1493,height=675)
+canvas = Canvas(container,bg="white",width=1493,height=675)
 
  # Adding Scroll bar
 outputFrame = ttk.Frame(canvas)

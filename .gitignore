@@ -3,3 +3,6 @@ __pycache__
 canvas.py
 .vscode
 pdfReader.db
+GUI.py
+pdfReader.py
+ttkThemedGUI.py

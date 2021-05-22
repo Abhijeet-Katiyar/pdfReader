@@ -9,15 +9,18 @@ root=ThemedTk(theme="breeze")
 root.title("PDF Explorer")
 root.configure(background="white")
 
+# Setting icon
+root.iconbitmap("icon.ico")
 
 # Style for ttk widgets
  # Initialize style
 s = ttk.Style()
 # Create style used by default for all Frames
 s.configure('TLabel', background='white')
+s.configure('TFrame',background="white")
 s.configure('TGrid',background="white")
 s.configure('TCanvas',background="white")
-s.configure('TPack',background="white")
+s.configure('TRadiobutton',background="white")
 
 
 # To open window as maximized
@@ -97,9 +100,9 @@ def Search():
         pagenum_outputLable=ttk.Label(outputFrame,text=pagenum,anchor="w",wraplength=1000,justify=LEFT,font = ('courier', 10, 'normal'))
         pagenum_outputLable.grid(row=index,column=1,padx=10,pady=10,sticky="w")
         #adding radio buttons
-        Radiobutton(outputFrame,variable=var,value=i).grid(row=index,column=2)
+        ttk.Radiobutton(outputFrame,variable=var,value=i).grid(row=index,column=2)
     detailButton=ttk.Button(outputFrame,text="view Details",command= lambda: viewDetails(results,var.get()))
-    detailButton.grid(row=len(results),column=0)
+    detailButton.grid(row=len(results),pady=50,sticky="we",column=1)
    
 
 
